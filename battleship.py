@@ -29,13 +29,10 @@ def makeModel(data):
     data["number of cols"]=10
     data["board size"]=500
     data["number of ships"]=5
-    x=list(data.values())
-    data["computer"]=list(x)
-    data["user"]=list(x)
     data["cellsize"]=data["board size"]/data["number of rows"]
-    computergrid=emptyGrid(data["number of rows"],data["number of cols"])
-    usergrid=emptyGrid(data["number of rows"],data["number of cols"])
-    addShips(computergrid,data["number of ships"])
+    data["computer"]=emptyGrid(data["number of rows"],data["number of cols"])
+    data["user"]=emptyGrid(data["number of rows"],data["number of cols"])
+    addShips(data["computer"],data["number of ships"])
 
 '''
 makeView(data, userCanvas, compCanvas)
