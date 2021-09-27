@@ -63,11 +63,11 @@ Returns: None
 '''
 def mousePressed(data, event, board):
     if data["numships"]<5:
-        cell=getClickedCell(data,event)
-    # if board==data["user"]:   
-        clickUserBoard(data,cell[0],cell[1])
-            
+        if board=="user":
+            cell=getClickedCell(data,event)
+            clickUserBoard(data,cell[0],cell[1])
 
+                      
 #### WEEK 1 ####
 
 '''
@@ -110,7 +110,7 @@ def checkShip(grid, ship):
     for i in range(len(ship)):
         x=ship[i][0]
         y=ship[i][1]
-        if grid[x][y]!=1:
+        if grid[x][y]!=EMPTY_UNCLICKED:
             return False
     return True
 
@@ -128,7 +128,7 @@ def addShips(grid, numShips):
             for i in range(len(ship)):
                 x=ship[i][0]
                 y=ship[i][1]
-                grid[x][y]=2
+                grid[x][y]=SHIP_UNCLICKED
             j+=1
 
     return grid
