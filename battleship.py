@@ -32,7 +32,8 @@ def makeModel(data):
     data["cellsize"]=data["board size"]/data["number of rows"]
     data["computer"]=emptyGrid(data["number of rows"],data["number of cols"])
     data["user"]=emptyGrid(data["number of rows"],data["number of cols"])
-    data["temporary ship"]=test.testShip()
+    data["temporary ship"]=[]
+    data["numships"]=0
     addShips(data["computer"],data["number of ships"])
     
 '''
@@ -61,7 +62,11 @@ Parameters: dict mapping strs to values ; mouse event object ; 2D list of ints
 Returns: None
 '''
 def mousePressed(data, event, board):
-    pass
+    if data["numships"]<5:
+        cell=getClickedCell(data,event)
+    # if board==data["user"]:   
+        clickUserBoard(data,cell[0],cell[1])
+            
 
 #### WEEK 1 ####
 
@@ -192,7 +197,7 @@ Returns: None
 '''
 def drawShip(data, canvas, ship):
     size=data["cellsize"]
-    for i in range(3):
+    for i in range(len(ship)):
         canvas.create_rectangle(ship[i][1]*size,ship[i][0]*size,size+ship[i][1]*size,size+ship[i][0]*size,fill="white")
 
 
@@ -202,7 +207,12 @@ Parameters: 2D list of ints ; 2D list of ints
 Returns: bool
 '''
 def shipIsValid(grid, ship):
-    return
+    if checkShip(grid,ship):
+        if isVertical(ship):
+            return True
+        elif isHorizontal(ship):
+            return True
+    return False
 
 
 '''
@@ -211,8 +221,14 @@ Parameters: dict mapping strs to values
 Returns: None
 '''
 def placeShip(data):
-    return
-
+    if shipIsValid(data["user"],data["temporary ship"]):
+        ship=data["temporary ship"]
+        for i in ship:
+            data["user"][i[0]][i[1]]=SHIP_UNCLICKED
+        data["numships"]+=1
+    else:
+        print("Error:ship is not valid")
+    data["temporary ship"]=[]
 
 '''
 clickUserBoard(data, row, col)
@@ -220,7 +236,11 @@ Parameters: dict mapping strs to values ; int ; int
 Returns: None
 '''
 def clickUserBoard(data, row, col):
-    return
+    if [row,col] not in data["temporary ship"]:
+        data["temporary ship"].append([row,col])
+        if len(data["temporary ship"])==3:
+            placeShip(data)        
+
 
 
 ### WEEK 3 ###
@@ -333,5 +353,6 @@ if __name__ == "__main__":
     # test.testIsVertical()
     # test.testIsHorizontal()
     # test.testGetClickedCell()
+    # test.testShipIsValid()
     ## Finally, run the simulation to test it manually ##
     runSimulation(500, 500)
