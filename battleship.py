@@ -32,7 +32,7 @@ def makeModel(data):
     data["cellsize"]=data["board size"]/data["number of rows"]
     data["computer"]=emptyGrid(data["number of rows"],data["number of cols"])
     data["user"]=emptyGrid(data["number of rows"],data["number of cols"])
-    data["temporary ship"]=test.testShip()
+    data["temporary ship"]=[]
     addShips(data["computer"],data["number of ships"])
     
 '''
@@ -105,7 +105,7 @@ def checkShip(grid, ship):
     for i in range(len(ship)):
         x=ship[i][0]
         y=ship[i][1]
-        if grid[x][y]!=1:
+        if grid[x][y]!=EMPTY_UNCLICKED:
             return False
     return True
 
@@ -123,7 +123,7 @@ def addShips(grid, numShips):
             for i in range(len(ship)):
                 x=ship[i][0]
                 y=ship[i][1]
-                grid[x][y]=2
+                grid[x][y]=SHIP_UNCLICKED
             j+=1
 
     return grid
@@ -192,7 +192,7 @@ Returns: None
 '''
 def drawShip(data, canvas, ship):
     size=data["cellsize"]
-    for i in range(3):
+    for i in range(len(ship)):
         canvas.create_rectangle(ship[i][1]*size,ship[i][0]*size,size+ship[i][1]*size,size+ship[i][0]*size,fill="white")
 
 
