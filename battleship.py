@@ -25,8 +25,14 @@ Parameters: dict mapping strs to values
 Returns: None
 '''
 def makeModel(data):
-    return
-
+    data["number of rows"]=10
+    data["number of cols"]=10
+    data["board size"]=500
+    data["number of ships"]=5
+    data["cellsize"]=data["board size"]/data["number of rows"]
+    data["computer"]=emptyGrid(data["number of rows"],data["number of cols"])
+    data["user"]=emptyGrid(data["number of rows"],data["number of cols"])
+    addShips(data["computer"],data["number of ships"])
 
 '''
 makeView(data, userCanvas, compCanvas)
@@ -299,6 +305,7 @@ if __name__ == "__main__":
     # test.testEmptyGrid()
     # test.testCreateShip()
     # test.testCheckShip()
-    test.testAddShips()
+    # test.testAddShips()
+    test.testMakeModel()
     ## Finally, run the simulation to test it manually ##
     # runSimulation(500, 500)
