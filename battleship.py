@@ -35,7 +35,6 @@ def makeModel(data):
     data["temporary ship"]=[]
     data["numships"]=0
     addShips(data["computer"],data["number of ships"])
-    
 '''
 makeView(data, userCanvas, compCanvas)
 Parameters: dict mapping strs to values ; Tkinter canvas ; Tkinter canvas
@@ -160,8 +159,10 @@ Returns: bool
 '''
 def isVertical(ship):
     if ship[0][1]==ship[1][1]==ship[2][1]:
-        if (ship[0][0]+ship[1][0]+ship[2][0])%3==0:
-           return True
+        x=sorted([ship[0][0],ship[1][0],ship[2][0]])
+        if x[1]-x[0]==1:
+            if x[2]-x[1]==1:
+                return True
     
     return False
 
@@ -173,8 +174,10 @@ Returns: bool
 '''
 def isHorizontal(ship):
     if ship[0][0]==ship[1][0]==ship[2][0]:
-        if (ship[0][1]+ship[1][1]+ship[2][1])%3==0:
-           return True
+        x=sorted([ship[0][1],ship[1][1],ship[2][1]])
+        if x[1]-x[0]==1:
+            if x[2]-x[1]==1:
+                return True
     
     return False
 
