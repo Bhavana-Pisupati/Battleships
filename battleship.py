@@ -276,7 +276,8 @@ def updateBoard(data, board, row, col, player):
             board[row][col]=SHIP_CLICKED
         elif board[row][col]==EMPTY_UNCLICKED:
             board[row][col]=EMPTY_CLICKED
-        isGameOver(board)
+        if isGameOver(board):
+            data["winner"]=player
 
 
 '''
@@ -330,14 +331,15 @@ Returns: None
 '''
 def drawGameOver(data, canvas):
     if data["winner"]=="user":
-        canvas.create_text(250, 220, text="You won. Congratulations!", font="Arial 25")
-        canvas.create_text(250, 320, text="Press Enter to play again", font="Arial 25")
-    if data["winner"]=="computer":
-        canvas.create_text(250, 220, text="Computer Wins :(", font="Arial 25")
-        canvas.create_text(250, 320, text="Press Enter to play again", font="Arial 25")
+        canvas.create_text(250, 220, text="You won", font="Arial 40",fill="pink")
+        canvas.create_text(250, 320, text="Congratulations!", font="Arial 40",fill="pink")
+        canvas.create_text(250, 420, text="Press Enter to play again", font="Arial 25",fill="pink")
+    if data["winner"]=="comp":
+        canvas.create_text(250, 220, text="You lose :(", font="Arial 40",fill="pink")
+        canvas.create_text(250, 320, text="Press Enter to play again", font="Arial 25",fill="pink")
     if data["winner"]=="draw":
-        canvas.create_text(250, 220, text="Out of moves. Draw", font="Arial 25")
-        canvas.create_text(250, 320, text="Press Enter to play again", font="Arial 25")
+        canvas.create_text(250, 220, text="Out of moves. Draw", font="Arial 40",fill="pink")
+        canvas.create_text(250, 320, text="Press Enter to play again", font="Arial 25",fill="pink")
 
 
 
