@@ -34,7 +34,7 @@ def makeModel(data):
     data["user"]=emptyGrid(data["number of rows"],data["number of cols"])
     data["temporary ship"]=[]
     data["numships"]=0
-    data["winner"]=None
+    data["winner"]="user"
     data["max num of turns"]=50
     data["current num of turns"]=0
     addShips(data["computer"],data["number of ships"])
@@ -56,7 +56,9 @@ Parameters: dict mapping strs to values ; key event object
 Returns: None
 '''
 def keyPressed(data, event):
-    pass
+    print(event,type(event))
+    if event.char=='\r':
+        makeModel(data)
 
 
 '''
@@ -329,10 +331,13 @@ Returns: None
 def drawGameOver(data, canvas):
     if data["winner"]=="user":
         canvas.create_text(250, 220, text="You won. Congratulations!", font="Arial 25")
+        canvas.create_text(250, 320, text="Press Enter to play again", font="Arial 25")
     if data["winner"]=="computer":
         canvas.create_text(250, 220, text="Computer Wins :(", font="Arial 25")
+        canvas.create_text(250, 320, text="Press Enter to play again", font="Arial 25")
     if data["winner"]=="draw":
         canvas.create_text(250, 220, text="Out of moves. Draw", font="Arial 25")
+        canvas.create_text(250, 320, text="Press Enter to play again", font="Arial 25")
 
 
 
