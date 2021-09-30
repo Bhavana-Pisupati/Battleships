@@ -34,7 +34,7 @@ def makeModel(data):
     data["user"]=emptyGrid(data["number of rows"],data["number of cols"])
     data["temporary ship"]=[]
     data["numships"]=0
-    data["winner"]="user"
+    data["winner"]=None
     data["max num of turns"]=50
     data["current num of turns"]=0
     addShips(data["computer"],data["number of ships"])
@@ -405,8 +405,8 @@ if __name__ == "__main__":
     # test.testIsHorizontal()
     # test.testGetClickedCell()
     # test.testShipIsValid()
-    test.testUpdateBoard()
-    test.testGetComputerGuess()
-    test.testIsGameOver()
+    # test.testUpdateBoard()
+    # test.testGetComputerGuess()
+    # test.testIsGameOver()
     ## Finally, run the simulation to test it manually ##
     runSimulation(500, 500)
